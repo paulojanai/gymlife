@@ -1,7 +1,7 @@
 .input {
   @include flex(column, flex-start, flex-start);
 
-  label {
+  .input-label {
     color: $grayscale-darker;
     font-size: 1.6rem;
     font-weight: 700;
@@ -13,27 +13,6 @@
     position: relative;
     @include flex(row, center, flex-start);
     width: 100%;
-
-    a {
-      pointer-events: none;
-      position: absolute;
-      opacity: 0;
-      right: 1.6rem;
-      color: $grayscale-darker;
-      transform: translateX(-4px);
-      transition: all 0.3s;
-
-      &.input-password {
-        display: block;
-      }
-    }
-
-    .clean-input {
-      opacity: 1;
-      display: block;
-      transform: translateX(0px);
-      pointer-events: all;
-    }
 
     input {
       width: 100%;
@@ -50,6 +29,23 @@
         border: 1px solid $grayscale-darker;
         background-color: $grayscale-lightest;
       }
+    }
+
+    a {
+      pointer-events: none;
+      position: absolute;
+      opacity: 0;
+      right: 1.6rem;
+      color: $grayscale-darker;
+      transform: translateX(-4px);
+      transition: all 0.3s;
+    }
+
+    .action-input-visible {
+      opacity: 1;
+      display: block;
+      transform: translateX(0px);
+      pointer-events: all;
     }
   }
 
