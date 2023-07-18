@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Space+Grotesk:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+  <title>Gymlife</title>
+</head>
+
+<body>
+  <div class="hero">
+    <div class="content">
+      <img src="./img/logo.svg" alt="Imagem Gymlife">
+      <h2>Transforme seu corpo e sua mente com a GymLife academia!</h2>
+      <p>Aqui é onde o suor se transforma em sucesso.
+        Não espere. Comece agora a sua jornada fitness.</p>
+    </div>
+  </div>
+
+  <div class="form">
+    <div class="container">
+      <header>
+        <h1>Vamos começar</h1>
+        <p>Crie sua conta agora</p>
+      </header>
+
+      <main>
+        <div class="input">
+          <label for="full-name">Nome completo</label>
+          <div class="text-field js-full-name">
+            <input type="text" placeholder="Digite seu nome completo">
+            <a href="#" class="js-clean-full-name"><i data-lucide="x"></i></a>
+          </div>
+        </div>
+
+        <div class="input">
+          <label for="email">Seu email</label>
+          <div class="text-field js-email">
+            <input type="email" placeholder="Digite seu melhor email">
+            <a href="#"><i data-lucide="x"></i></a>
+          </div>
+
+          <!-- <div class="help-text">
+            <i data-lucide="alert-triangle" class="icon"></i>
+            <p>Email inválido</p>
+          </div> -->
+        </div>
+
+        <div class="input">
+          <label for="password">Sua senha</label>
+          <div class="text-field js-password">
+            <input type="password" />
+            <a href="#" class="input-password js-show-password"><i data-lucide="eye"></i></a>
+          </div>
+        </div>
+
+        <div class="validation-password">
+        </div>
+
+        <div class="required-in-password">
+          <p>Sua senha deve possuir:</p>
+          <ul>
+            <li>
+              <i data-lucide="x" class="icon"></i><span>Pelo menos 8 caracteres</span>
+            </li>
+            <li>
+              <i data-lucide="x" class="icon"></i><span>Pelo menos 1 número</span>
+            </li>
+            <li>
+              <i data-lucide="x" class="icon"></i><span>Pelo menos 1 caractere especial. (!@#$%^&*)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="recomendation">
+          <i data-lucide="info" class="icon"></i>
+          <span>Recomendamos uma senha forte</span>
+        </div>
+      </main>
+
+      <footer>
+        <a href="#" class="btn-primary js-create-account"><span>Criar conta</span></a>
+        <p>Já tem uma conta? <a href="#">Acessar aqui</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="./js/script.js"></script>
+<script>
+  lucide.createIcons();
+</script>
+
+</html>
