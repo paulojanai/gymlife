@@ -1,0 +1,138 @@
+body {
+  @include flex(row, center, center);
+
+  .hero {
+    width: 100%;
+    max-width: 71rem;
+    background: url('../img/background.png') no-repeat;
+    background-size: 100%;
+    height: 100vh;
+
+    @include flex(column, center, flex-end);
+
+    .content {
+      background-color: $grayscale-darker;
+      padding: 6rem;
+
+      img {
+        margin-bottom: 4rem;
+      }
+
+      h2 {
+        color: $grayscale-lightest;
+        font-size: 3.2rem;
+        font-weight: 700;
+        line-height: 160%;
+        margin-bottom: 1.6rem;
+      }
+
+      p {
+        color: $grayscale-medium;
+        font-size: 2rem;
+        line-height: 160%;
+      }
+
+      @include responsive (1200px) {
+        padding: 3.2rem;
+      }
+    }
+  }
+
+  .form {
+    width: 100%;
+    @include flex(row, center, center);
+
+    .container {
+      padding-right: 2.4rem;
+      padding-left: 2.4rem;
+      width: 100%;
+      max-width: 64rem;
+
+      header {
+        margin-bottom: 5.4rem;
+
+        h1 {
+          color: $grayscale-darker;
+          font-size: 4rem;
+          font-weight: 700;
+          line-height: 100%;
+          margin-bottom: 1.6rem;
+        }
+
+        p {
+          color: $grayscale-dark;
+          font-size: 1.8rem;
+          font-weight: 400;
+          line-height: 100%;
+        }
+      }
+
+      main {
+        .icon {
+          height: 1.8rem;
+          width: 1.8rem;
+          margin-right: 0.8rem;
+          color: $grayscale-dark;
+        }
+
+        span {
+          font-size: 1.4rem;
+          font-weight: 400;
+          line-height: 100%;
+          color: $grayscale-dark;
+        }
+
+        .input {
+          margin-bottom: 2rem;
+
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+
+        .required-in-password {
+          p {
+            color: $grayscale-darker;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 100%;
+            margin-bottom: 0.8rem;
+          }
+
+          ul {
+            li {
+              @include flex(row, center, flex-start);
+            }
+          }
+        }
+
+        .recomendation {
+          @include flex(row, center, flex-start);
+          margin-top: 2rem;
+          margin-bottom: 2.4rem;
+        }
+      }
+
+      footer {
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 100%;
+
+        a {
+          &:last-child {
+            color: $brand-primary;
+            text-decoration-line: underline;
+          }
+        }
+
+        p {
+          margin-top: 3.2rem;
+          color: $grayscale-dark;
+
+        }
+      }
+    }
+
+  }
+}
