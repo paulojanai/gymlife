@@ -30,34 +30,36 @@
       </header>
 
       <main>
-        <div class="input">
-          <label for="full-name">Nome completo</label>
-          <div class="text-field js-full-name">
-            <input type="text" placeholder="Digite seu nome completo">
-            <a href="#" class="js-clean-full-name"><i data-lucide="x"></i></a>
-          </div>
-        </div>
+        <ul class="js-all-input">
+          <li class="input">
+            <label for="full-name">Nome completo</label>
+            <div class="text-field js-full-name">
+              <input type="text" placeholder="Digite seu nome completo">
+              <a href="#" class="js-clean-full-name"><i data-lucide="x"></i></a>
+            </div>
+          </li>
 
-        <div class="input">
-          <label for="email">Seu email</label>
-          <div class="text-field js-email">
-            <input type="email" placeholder="Digite seu melhor email">
-            <a href="#"><i data-lucide="x"></i></a>
-          </div>
+          <li class="input">
+            <label for="email">Seu email</label>
+            <div class="text-field js-email">
+              <input type="email" placeholder="Digite seu melhor email">
+              <a href="#" class="js-clean-email"><i data-lucide="x"></i></a>
+            </div>
 
-          <!-- <div class="help-text">
-            <i data-lucide="alert-triangle" class="icon"></i>
-            <p>Email inválido</p>
-          </div> -->
-        </div>
+            <!-- <div class="help-text">
+              <i data-lucide="alert-triangle" class="icon"></i>
+              <p>Email inválido</p>
+            </div> -->
+          </li>
 
-        <div class="input">
-          <label for="password">Sua senha</label>
-          <div class="text-field js-password">
-            <input type="password" />
-            <a href="#" class="input-password js-show-password"><i data-lucide="eye"></i></a>
-          </div>
-        </div>
+          <li class="input password">
+            <label for="password">Sua senha</label>
+            <div class="text-field js-password">
+              <input type="password" />
+              <a href="#" class="input-password js-show-password"><i data-lucide="eye"></i></a>
+            </div>
+          </li>
+        </ul>
 
         <div class="validation-password">
         </div>
@@ -84,7 +86,7 @@
       </main>
 
       <footer>
-        <a href="#" class="btn-primary js-create-account"><span>Criar conta</span></a>
+        <a href="#" class="btn-primary disabled js-create-account"><span>Criar conta</span></a>
         <p>Já tem uma conta? <a href="#">Acessar aqui</a></p>
       </footer>
     </div>
