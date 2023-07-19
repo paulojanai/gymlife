@@ -50,10 +50,10 @@
   }
 
   .help-text {
-    display: none;
+    @include flex(row, center, flex-start);
     gap: 0.4rem;
-    margin-top: 0.8rem;
-    transition: all 0.3;
+    margin-top: -20px;
+    transition: all 0.3s;
 
     span {
       svg {
@@ -67,11 +67,15 @@
       font-weight: 700;
       line-height: 100%;
     }
+
+    &.visible {
+      opacity: 1;
+      margin-top: 0.4rem;
+    }
   }
 
   &.default {
     .help-text {
-      @include flex(row, center, flex-start);
       color: $grayscale-dark;
     }
   }
@@ -83,8 +87,8 @@
         border-color: $semantic-error;
       }
     }
+
     .help-text {
-      @include flex(row, center, flex-start);
       color: $semantic-error;
 
       span {
@@ -102,8 +106,8 @@
         border-color: $semantic-success;
       }
     }
+
     .help-text {
-      @include flex(row, center, flex-start);
       color: $semantic-success;
 
       span {
