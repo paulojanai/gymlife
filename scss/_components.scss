@@ -51,13 +51,14 @@
 
   .help-text {
     display: none;
-    color: $grayscale-dark;
     gap: 0.4rem;
     margin-top: 0.8rem;
     transition: all 0.3;
 
-    svg {
-      height: 1.6rem;
+    span {
+      svg {
+        height: 1.6rem;
+      }
     }
 
     p {
@@ -85,6 +86,12 @@
     .help-text {
       @include flex(row, center, flex-start);
       color: $semantic-error;
+
+      span {
+        svg {
+          color: $semantic-error;
+        }
+      }
     }
   }
 
@@ -98,6 +105,12 @@
     .help-text {
       @include flex(row, center, flex-start);
       color: $semantic-success;
+
+      span {
+        svg {
+          color: $semantic-success;
+        }
+      }
     }
   }
 }
