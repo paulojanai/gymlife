@@ -59,9 +59,10 @@ body {
     }
   }
 
-  .form {
+  main {
     @include flex(row, center, center);
     width: 100%;
+    height: 100vh;
     margin-left: 64rem;
 
     .container {
@@ -104,7 +105,7 @@ body {
           color: $grayscale-dark;
         }
 
-        .input {
+        .form-control {
           margin-bottom: 2rem;
 
           &:last-child {
@@ -113,6 +114,8 @@ body {
         }
 
         .required-in-password {
+          margin-top: 2.4rem;
+
           p {
             color: $grayscale-darker;
             font-size: 1.6rem;
@@ -135,11 +138,12 @@ body {
         }
       }
 
-      footer {
+      .sign-in {
         text-align: center;
         font-size: 1.8rem;
         font-weight: 700;
         line-height: 100%;
+        margin-top: 4rem;
 
         a {
           &:last-child {
@@ -156,6 +160,7 @@ body {
     }
 
     @include responsive(1366px) {
+      height: 100%;
       margin-left: 56rem;
     }
   }

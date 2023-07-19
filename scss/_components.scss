@@ -1,7 +1,7 @@
-.input {
+.form-control {
   @include flex(column, flex-start, flex-start);
 
-  .input-label {
+  label {
     color: $grayscale-darker;
     font-size: 1.6rem;
     font-weight: 700;
@@ -19,14 +19,14 @@
       outline: none;
       height: 5.4rem;
       padding: 1.6rem;
-      border: 1px solid $grayscale-medium;
+      border: 1.5px solid $grayscale-medium;
       font-size: 1.6rem;
       font-weight: 400;
       line-height: 100%;
       transition: all 0.3s;
 
       &:focus {
-        border: 1px solid $grayscale-darker;
+        border-color: $grayscale-darker;
         background-color: $grayscale-lightest;
       }
     }
@@ -41,7 +41,7 @@
       transition: all 0.3s;
     }
 
-    .action-input-visible {
+    .action-input {
       opacity: 1;
       display: block;
       transform: translateX(0px);
@@ -50,11 +50,13 @@
   }
 
   .help-text {
-    @include flex(row, center, flex-start);
+    display: none;
+    color: $grayscale-dark;
     gap: 0.4rem;
     margin-top: 0.8rem;
+    transition: all 0.3;
 
-    .icon {
+    svg {
       height: 1.6rem;
     }
 
@@ -66,17 +68,43 @@
     }
   }
 
-  &.error {
-    color: $semantic-error;
+  &.default {
+    .help-text {
+      @include flex(row, center, flex-start);
+      color: $grayscale-dark;
+    }
+  }
 
-    input {
-      border: 1px solid $semantic-error;
+  &.error {
+    .text-field {
+      input {
+        background-color: $semantic-error-lightest;
+        border-color: $semantic-error;
+      }
+    }
+    .help-text {
+      @include flex(row, center, flex-start);
+      color: $semantic-error;
+    }
+  }
+
+  &.success {
+    .text-field {
+      input {
+        background-color: $semantic-success-lightest;
+        border-color: $semantic-success;
+      }
+    }
+    .help-text {
+      @include flex(row, center, flex-start);
+      color: $semantic-success;
     }
   }
 }
 
 .btn-primary {
   @include flex(row, center, center);
+  width: 100%;
   background-color: $grayscale-darker;
   height: 5.6rem;
   color: $grayscale-lightest;
@@ -91,7 +119,7 @@
 
   &.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    pointer-events: none;
 
     span {
       transform: scale(1);

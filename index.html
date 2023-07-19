@@ -25,46 +25,61 @@
       </div>
     </div>
 
-    <div class="form">
+    <main>
       <div class="container">
         <header>
           <h1>Vamos começar</h1>
           <p>Crie sua conta agora</p>
         </header>
 
-        <form>
-          <ul class="js-all-input">
-            <li class="input">
-              <label for="full-name" class="input-label">Nome completo</label>
-              <div class="text-field js-full-name">
-                <input type="text" placeholder="Digite seu nome completo" />
-                <a href="#" class="js-clean"><i data-lucide="x"></i></a>
-              </div>
-            </li>
+        <form class="form js-form" action="#">
+          <div class="form-control">
+            <label for="full-name" class="input-label">Nome completo</label>
+            <div class="text-field">
+              <input
+                type="text"
+                class="js-full-name"
+                placeholder="Digite seu nome completo"
+              />
+              <a href="#" class="js-clean"><i data-lucide="x"></i></a>
+            </div>
+            <div class="help-text">
+              <i data-lucide="alert-triangle"></i>
+              <p>Message</p>
+            </div>
+          </div>
 
-            <li class="input">
-              <label for="email" class="input-label">Seu email</label>
-              <div class="text-field js-email">
-                <input type="email" placeholder="Digite seu melhor email" />
-                <a href="#" class="js-clean"><i data-lucide="x"></i></a>
-              </div>
+          <div class="form-control">
+            <label for="email" class="input-label">Email</label>
+            <div class="text-field">
+              <input
+                type="email"
+                class="js-email"
+                placeholder="Digite seu email"
+              />
+              <a href="#" class="js-clean"><i data-lucide="x"></i></a>
+            </div>
+            <div class="help-text">
+              <i data-lucide="alert-triangle"></i>
+              <p>Message</p>
+            </div>
+          </div>
 
-              <!-- <div class="help-text">
-              <i data-lucide="alert-triangle" class="icon"></i>
-              <p>Email inválido</p>
-            </div> -->
-            </li>
-
-            <li class="input">
-              <label for="password" class="input-label">Sua senha</label>
-              <div class="text-field js-password">
-                <input type="password" />
-                <a href="#" class="js-show-password"
-                  ><i data-lucide="eye"></i
-                ></a>
-              </div>
-            </li>
-          </ul>
+          <div class="form-control">
+            <label for="password" class="input-label">Sua senha</label>
+            <div class="text-field">
+              <input
+                type="password"
+                class="js-password"
+                placeholder="Digite sua senha"
+              />
+              <a href="#" class="js-show-password"><i data-lucide="eye"></i></a>
+            </div>
+            <div class="help-text">
+              <i data-lucide="alert-triangle"></i>
+              <p>Message</p>
+            </div>
+          </div>
 
           <div class="validation-password"></div>
 
@@ -90,16 +105,11 @@
             <i data-lucide="info" class="icon"></i>
             <span>Recomendamos uma senha forte</span>
           </div>
-
-          <footer>
-            <a href="#" type="submit" class="btn-primary js-create-account"
-              >Criar conta</a
-            >
-            <p>Já tem uma conta? <a href="#">Acessar aqui</a></p>
-          </footer>
+          <button type="submit" class="btn-primary">Criar conta</button>
         </form>
+        <p class="sign-in">Já tem uma conta? <a href="#">Acessar aqui</a></p>
       </div>
-    </div>
+    </main>
   </body>
 
   <script src="https://unpkg.com/lucide@latest"></script>
