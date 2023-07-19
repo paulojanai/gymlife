@@ -6,8 +6,6 @@ const iconError = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 
 const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
-const validate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
 const form = document.querySelector(".js-form");
 const allInput = document.querySelectorAll(
   ".form .form-control .text-field input"
@@ -144,20 +142,64 @@ function setSuccess(input, message) {
 }
 
 // Validate email
+const validateRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 email.addEventListener("focusout", (event) => {
   let length = email.value.length;
 
-  if (length > 0 && !validate.test(email.value)) {
+  if (length > 0 && !validateRegExp.test(email.value)) {
     setError(email, "Email inválido");
   }
 
   if (length > 0) {
     email.addEventListener("input", (event) => {
-      if (!validate.test(email.value)) {
+      if (!validateRegExp.test(email.value)) {
         setError(email, "Email inválido");
       } else {
         setSuccess(email, "Email válido");
       }
     });
   }
+});
+
+//Validate password
+const weak = {
+  minRegExp: /^.{8,}$/,
+  oneNumericRegExp: /\d/,
+  oneEspecialRegExp: /[\W_]/,
+};
+
+const moderate = {
+  minRegExp: /^.{10,}$/,
+  oneNumericRegExp: /^(?:\D*\d){2}/,
+  oneEspecialRegExp: /(?:[\W_].*){2}/,
+};
+
+const strong = {
+  minRegExp: /^.{12,}$/,
+  oneNumericRegExp: /^(?:\D*\d){3}/,
+  oneEspecialRegExp: /(?:[\W_].*){3}/,
+};
+
+password.addEventListener("input", (event) => {
+  console.log(
+    "Senha fraca",
+    weak.minRegExp.test(password.value) &&
+      weak.oneNumericRegExp.test(password.value) &&
+      weak.oneEspecialRegExp.test(password.value)
+  );
+
+  console.log(
+    "Senha moderada",
+    moderate.minRegExp.test(password.value) &&
+      moderate.oneNumericRegExp.test(password.value) &&
+      moderate.oneEspecialRegExp.test(password.value)
+  );
+
+  console.log(
+    "Senha forte",
+    strong.minRegExp.test(password.value) &&
+      strong.oneNumericRegExp.test(password.value) &&
+      strong.oneEspecialRegExp.test(password.value)
+  );
 });
