@@ -6,6 +6,24 @@ const iconError = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 
 const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
+const validateRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const validatePasswordRegExp = {
+weak : {
+  minRegExp: /^.{8,}$/,
+  oneNumericRegExp: /\d/,
+  oneEspecialRegExp: /[\W_]/,
+},
+moderate : {
+  minRegExp: /^.{10,}$/,
+  oneNumericRegExp: /^(?:\D*\d){2}/,
+  oneEspecialRegExp: /(?:[\W_].*){2}/,
+},
+strong : {
+  minRegExp: /^.{12,}$/,
+  oneNumericRegExp: /^(?:\D*\d){3}/,
+  oneEspecialRegExp: /(?:[\W_].*){3}/,
+}}
+
 const form = document.querySelector(".js-form");
 const allInput = document.querySelectorAll(
   ".form .form-control .text-field input"
@@ -13,77 +31,9 @@ const allInput = document.querySelectorAll(
 const fullName = document.querySelector(".js-full-name");
 const email = document.querySelector(".js-email");
 const password = document.querySelector(".js-password");
+const progress = document.querySelectorAll(".line-progress");
 
-//Configurações e compotarmento padrões do input component
-allInput.forEach((input) => {
-  let nameClass = input.nextElementSibling.className;
-
-  isBlank(input);
-
-  showActionsInput(input);
-
-  if (nameClass === "js-clean") {
-    cleanInput(input);
-  }
-
-  if (nameClass === "js-show-password") {
-    showPassword(input);
-  }
-});
-
-function isBlank(input) {
-  input.addEventListener("focusout", (event) => {
-    event.preventDefault();
-
-    if (input.value == 0) {
-      setError(input, "Preencha este campo");
-    }
-  });
-}
-
-function showActionsInput(input) {
-  let actionInput = input.nextElementSibling;
-
-  input.addEventListener("input", (event) => {
-    event.preventDefault();
-
-    if (input.value.length > 0) {
-      actionInput.classList.add("action-input");
-      setDefault(input);
-    } else {
-      actionInput.classList.remove("action-input");
-      setError(input, "Preencha este campo");
-    }
-  });
-}
-
-function cleanInput(input) {
-  let icon = input.nextElementSibling;
-
-  icon.addEventListener("click", (event) => {
-    event.preventDefault();
-    icon.classList.remove("action-input");
-    input.value = "";
-    setError(input, "Preencha este campo");
-  });
-}
-
-function showPassword(input) {
-  let icon = input.nextElementSibling;
-
-  icon.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (input.type === "text") {
-      input.type = "password";
-      icon.innerHTML = eye;
-    } else {
-      input.type = "text";
-      icon.innerHTML = eyeOff;
-    }
-  });
-}
-
-//
+//Configurações e compotarmento form
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -106,6 +56,93 @@ function checkInputs() {
   if (passwordValue === "") {
     setError(password, "Preencha este campo");
   }
+}
+
+//Configurações e compotarmento padrões do input component
+allInput.forEach((input) => {
+  let iconActionInput = input.nextElementSibling;
+
+  input.addEventListener("focusout", (event) => {
+    event.preventDefault();
+
+
+    
+    isBlank(input);
+  });
+
+  input.addEventListener("input", (event) => {
+    event.preventDefault();
+    
+    showActionsInput(iconActionInput, input);
+
+    if (input.type == "password") {
+      showStatusPassword(input)
+    }
+    if (input.type == "email") {
+      validateEmail(input)
+    }
+  });
+
+  actionInput(input);
+  
+});
+
+function isBlank(input) {
+  if (input.value == 0) {
+    return setError(input, "Preencha este campo");
+  }
+}
+
+function showActionsInput(actionInput, input) {
+  if (input.value.length > 0) {
+    actionInput.classList.add("action-input");
+    setDefault(input);
+  } else {
+    actionInput.classList.remove("action-input");
+    setError(input, "Preencha este campo");
+  }
+}
+
+function actionInput(input) {
+  let icon = input.nextElementSibling;
+  let nameClass = input.nextElementSibling.className;
+
+  icon.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    if (nameClass === "js-clean") {
+      cleanInput(icon, input);
+    }
+  
+    if (nameClass === "js-show-password") {
+      showPassword(icon, input);
+    }
+  })
+}
+
+function cleanInput(icon, input) {
+  icon.classList.remove("action-input");
+  input.value = "";
+  setError(input, "Preencha este campo");
+}
+
+function showPassword(icon, input) {
+  input.type === "text" ?
+    (input.type = "password",
+    icon.innerHTML = eye)
+  :
+    (input.type = "text",
+    icon.innerHTML = eyeOff)
+}
+
+function showStatusPassword(input) {
+  let validationPassword = document.querySelector(".validation-password");
+
+  if(input.value.length > 0) {
+    validationPassword.classList.add("visible-status");
+  } else {
+    validationPassword.classList.remove("visible-status");
+  } 
 }
 
 function setDefault(input) {
@@ -148,65 +185,39 @@ function setSuccess(input, message) {
   formControl.className = "form-control success";
 }
 
-// Validate email
-const validateRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-email.addEventListener("focusout", (event) => {
-  let length = email.value.length;
-
-  if (length > 0 && !validateRegExp.test(email.value)) {
-    setError(email, "Email inválido");
+// Functions validate
+function validateEmail(input) {
+  if (!validateRegExp.test(input.value)) {
+    setError(input, "Email inválido");
+  } else {
+    setSuccess(input, "Email válido");
   }
-
-  if (length > 0) {
-    email.addEventListener("input", (event) => {
-      if (!validateRegExp.test(email.value)) {
-        setError(email, "Email inválido");
-      } else {
-        setSuccess(email, "Email válido");
-      }
-    });
-  }
-});
+}
 
 //Validate password
-const weak = {
-  minRegExp: /^.{8,}$/,
-  oneNumericRegExp: /\d/,
-  oneEspecialRegExp: /[\W_]/,
-};
+// password.addEventListener("input", (event) => {
+  // progress[0].style.stroke="red";
+  // progress[1].style.stroke="red";
+  // progress[2].style.stroke="red";
 
-const moderate = {
-  minRegExp: /^.{10,}$/,
-  oneNumericRegExp: /^(?:\D*\d){2}/,
-  oneEspecialRegExp: /(?:[\W_].*){2}/,
-};
+  // console.log(
+  //   "Senha fraca",
+  //   weak.minRegExp.test(password.value) &&
+  //     weak.oneNumericRegExp.test(password.value) &&
+  //     weak.oneEspecialRegExp.test(password.value)
+  // );
 
-const strong = {
-  minRegExp: /^.{12,}$/,
-  oneNumericRegExp: /^(?:\D*\d){3}/,
-  oneEspecialRegExp: /(?:[\W_].*){3}/,
-};
+  // console.log(
+  //   "Senha moderada",
+  //   moderate.minRegExp.test(password.value) &&
+  //     moderate.oneNumericRegExp.test(password.value) &&
+  //     moderate.oneEspecialRegExp.test(password.value)
+  // );
 
-password.addEventListener("input", (event) => {
-  console.log(
-    "Senha fraca",
-    weak.minRegExp.test(password.value) &&
-      weak.oneNumericRegExp.test(password.value) &&
-      weak.oneEspecialRegExp.test(password.value)
-  );
-
-  console.log(
-    "Senha moderada",
-    moderate.minRegExp.test(password.value) &&
-      moderate.oneNumericRegExp.test(password.value) &&
-      moderate.oneEspecialRegExp.test(password.value)
-  );
-
-  console.log(
-    "Senha forte",
-    strong.minRegExp.test(password.value) &&
-      strong.oneNumericRegExp.test(password.value) &&
-      strong.oneEspecialRegExp.test(password.value)
-  );
-});
+  // console.log(
+  //   "Senha forte",
+  //   strong.minRegExp.test(password.value) &&
+  //     strong.oneNumericRegExp.test(password.value) &&
+  //     strong.oneEspecialRegExp.test(password.value)
+  // );
+// });

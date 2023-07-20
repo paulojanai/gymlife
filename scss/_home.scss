@@ -142,14 +142,31 @@ body {
 
         .form-control {
           margin-bottom: 2rem;
+        }
 
-          &:last-child {
-            margin-bottom: 0px;
+        .validation-password {
+          margin-top: -1rem;
+          display: none;
+
+          svg {
+            .line-empty {
+              stroke: $grayscale-lightest;
+            }
+          }
+
+          .status {
+            font-size: 1.4rem;
+            line-height: 100%;
+            margin-top: 0.2rem;
+          }
+
+          &.visible-status {
+            display: block;
           }
         }
 
         .required-in-password {
-          margin-top: 2.4rem;
+          margin-top: 2rem;
 
           p {
             color: $grayscale-darker;
