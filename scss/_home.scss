@@ -146,7 +146,7 @@ body {
 
         .validation-password {
           margin-top: -1rem;
-          display: none;
+          // display: none;
 
           svg {
             .line-empty {
@@ -168,17 +168,44 @@ body {
         .required-in-password {
           margin-top: 2rem;
 
-          p {
+          .title {
             color: $grayscale-darker;
             font-size: 1.6rem;
             font-weight: 700;
             line-height: 100%;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.8rem
           }
 
           ul {
             li {
-              @include flex(row, center, flex-start);
+              @include flex(row, flex-start, flex-start);
+
+              span {
+                svg {
+                  color: $grayscale-dark;
+                }
+              }
+
+              p {
+                text-align: center;
+                font-size: 1.4rem;
+                font-weight: 400;
+                color: $grayscale-dark;
+              }
+
+
+              &.check {
+                span {
+                  svg {
+                    color: $semantic-success;
+                  }
+                }
+
+                p {
+                  color: $semantic-success;
+                  font-weight: 700;
+                }
+              }
             }
           }
         }

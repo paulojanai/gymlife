@@ -6,7 +6,14 @@ const iconError = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 
 const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
+const iconX = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+
 const validateRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const requiredPasswordRegExp = {
+  minRegExp: /^.{8,}$/,
+  oneNumericRegExp: /\d/,
+  oneEspecialRegExp: /[\W_]/
+}
 const validatePasswordRegExp = {
 weak : {
   minRegExp: /^.{8,}$/,
@@ -32,6 +39,8 @@ const fullName = document.querySelector(".js-full-name");
 const email = document.querySelector(".js-email");
 const password = document.querySelector(".js-password");
 const progress = document.querySelectorAll(".line-progress");
+
+const allRequiredPassword = document.querySelectorAll(".required-in-password ul li");
 
 //Configurações e compotarmento form
 form.addEventListener("submit", (event) => {
@@ -65,8 +74,6 @@ allInput.forEach((input) => {
   input.addEventListener("focusout", (event) => {
     event.preventDefault();
 
-
-    
     isBlank(input);
   });
 
@@ -75,8 +82,12 @@ allInput.forEach((input) => {
     
     showActionsInput(iconActionInput, input);
 
-    if (input.type == "password") {
-      showStatusPassword(input)
+    if (input.className === "js-password") {
+      showStatusPassword(input);
+
+      requirementMet(allRequiredPassword[0], requiredPasswordRegExp.minRegExp, input.value);
+      requirementMet(allRequiredPassword[1], requiredPasswordRegExp.oneNumericRegExp, input.value);
+      requirementMet(allRequiredPassword[2], requiredPasswordRegExp.oneEspecialRegExp, input.value);
     }
     if (input.type == "email") {
       validateEmail(input)
@@ -145,6 +156,28 @@ function showStatusPassword(input) {
   } 
 }
 
+function requirementMet(required, regExp, value) {
+  if(regExp.test(value)) {
+    setRequiredSucess(required);
+  } else {
+    setRequiredDefault(required);
+  }
+}
+
+function setRequiredSucess(required) {
+  const icon = required.firstElementChild.firstElementChild;
+
+  icon.innerHTML =iconCheck;
+  required.className = "check";
+}
+
+function setRequiredDefault(required) {
+  const icon = required.firstElementChild.firstElementChild;
+
+  icon.innerHTML =iconX;
+  required.className = "";
+}
+
 function setDefault(input) {
   const textField = input.parentElement;
   const formControl = textField.parentElement;
@@ -194,11 +227,7 @@ function validateEmail(input) {
   }
 }
 
-//Validate password
 // password.addEventListener("input", (event) => {
-  // progress[0].style.stroke="red";
-  // progress[1].style.stroke="red";
-  // progress[2].style.stroke="red";
 
   // console.log(
   //   "Senha fraca",
