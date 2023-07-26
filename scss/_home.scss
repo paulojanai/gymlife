@@ -146,18 +146,66 @@ body {
 
         .validation-password {
           margin-top: -1rem;
-          // display: none;
+          display: none;
 
-          svg {
-            .line-empty {
-              stroke: $grayscale-lightest;
+          .progress {
+            position: relative;
+            margin-bottom: 0.4rem;
+
+            .bar-empty {
+              height: 4px;
+              background-color: $grayscale-lightest;
+              width: 100%;
+            }
+
+            .bar {
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 4px;
+              width: 0%;
+              // transition: all 0.3s;
+
+              &.weak {
+                width: 33.333%;
+                background-color: $semantic-error;
+                animation: 0.3s fromZeroToWeak linear forwards;
+              }
+
+              &.moderate {
+                width: 66.666%;
+                background-color: $semantic-warning;
+                animation: 0.3s fromWeakToModerate linear forwards;
+              }
+
+              &.strong {
+                width: 100%;
+                background-color: $semantic-success;
+                animation: 0.3s fromModerateToStrong linear forwards;
+              }
             }
           }
 
-          .status {
-            font-size: 1.4rem;
-            line-height: 100%;
-            margin-top: 0.2rem;
+          p {
+            &.text-status {
+              color: $grayscale-dark;
+              font-size: 1.4rem;
+              line-height: 100%;
+              margin-top: 0.2rem;
+              font-weight: 700;
+            }
+
+            &.weak {
+              color: $semantic-error;
+            }
+
+            &.moderate {
+              color: $semantic-warning;
+            }
+
+            &.strong {
+              color: $semantic-success;
+            }
           }
 
           &.visible-status {
@@ -178,12 +226,10 @@ body {
 
           ul {
             li {
-              @include flex(row, flex-start, flex-start);
+              @include flex(row, center, flex-start);
 
               span {
-                svg {
-                  color: $grayscale-dark;
-                }
+                @include flex(row, center, center);
               }
 
               p {

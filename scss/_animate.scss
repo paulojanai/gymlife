@@ -1,0 +1,49 @@
+@keyframes fromZeroToWeak {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 33.333%;
+  }
+}
+
+@keyframes fromModeateToWeak {
+  from {
+    width: 66.666%;
+  }
+
+  to {
+    width: 33.333%;
+  }
+}
+
+@keyframes fromWeakToModerate {
+  from {
+    width: 33.333%;
+  }
+
+  to {
+    width: 66.666%;
+  }
+}
+
+@keyframes fromStrongToModarate {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 66.666%;
+  }
+}
+
+@keyframes fromModerateToStrong {
+  from {
+    width: 66.666%;
+  }
+
+  to {
+    width: 100%;
+  }
+}

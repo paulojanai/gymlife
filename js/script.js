@@ -15,21 +15,10 @@ const requiredPasswordRegExp = {
   oneEspecialRegExp: /[\W_]/
 }
 const validatePasswordRegExp = {
-weak : {
-  minRegExp: /^.{8,}$/,
-  oneNumericRegExp: /\d/,
-  oneEspecialRegExp: /[\W_]/,
-},
-moderate : {
-  minRegExp: /^.{10,}$/,
-  oneNumericRegExp: /^(?:\D*\d){2}/,
-  oneEspecialRegExp: /(?:[\W_].*){2}/,
-},
-strong : {
-  minRegExp: /^.{12,}$/,
-  oneNumericRegExp: /^(?:\D*\d){3}/,
-  oneEspecialRegExp: /(?:[\W_].*){3}/,
-}}
+  weak: /^(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$#!%*?&]{8,}$/,
+  moderate: /^(?=(?:.*\d){2})(?=.*[@$#!%*?&])[A-Za-z\d@$#!%*?&]{10,}$/,
+  strong: /^(?=(?:.*\d){2})(?=(?:.*[@$#!%*?&]){2})[A-Za-z\d@$#!%*?&]{12,}$/,
+}
 
 const form = document.querySelector(".js-form");
 const allInput = document.querySelectorAll(
@@ -38,7 +27,8 @@ const allInput = document.querySelectorAll(
 const fullName = document.querySelector(".js-full-name");
 const email = document.querySelector(".js-email");
 const password = document.querySelector(".js-password");
-const progress = document.querySelectorAll(".line-progress");
+const progressLevelPassword = document.querySelector(".js-bar");
+let statusLevels = [false, false, false];
 
 const allRequiredPassword = document.querySelectorAll(".required-in-password ul li");
 
@@ -84,6 +74,8 @@ allInput.forEach((input) => {
 
     if (input.className === "js-password") {
       showStatusPassword(input);
+
+      passwordLevel(input.value);
 
       requirementMet(allRequiredPassword[0], requiredPasswordRegExp.minRegExp, input.value);
       requirementMet(allRequiredPassword[1], requiredPasswordRegExp.oneNumericRegExp, input.value);
@@ -227,26 +219,49 @@ function validateEmail(input) {
   }
 }
 
-// password.addEventListener("input", (event) => {
+function passwordLevel(value) {
+  if(value.length > 0) {
+    if (validatePasswordRegExp.weak.test(value)) {
+      setStatusLevelPassword("weak", "Senha fraca");
+      statusLevels[0] = true;
+      console.log(statusLevels)
+    }
+  
+    if (validatePasswordRegExp.moderate.test(value)) {
+      setStatusLevelPassword("moderate", "Senha moderada");
+      if(statusLevels[2]) {
+        //Strong to Moderate
+        statusLevels[2] = false;
+      } else {
+        //Weak to Moderate
+        statusLevels[0] = true;
+      }
+      statusLevels[1] = true;
+      console.log(statusLevels)
+    }
+  
+    if (validatePasswordRegExp.strong.test(value)) {
+      setStatusLevelPassword("strong", "Senha forte");
+      if(statusLevels[1]) {
+        //Moderate to Strong
+        statusLevels[2] = false;
+       }
 
-  // console.log(
-  //   "Senha fraca",
-  //   weak.minRegExp.test(password.value) &&
-  //     weak.oneNumericRegExp.test(password.value) &&
-  //     weak.oneEspecialRegExp.test(password.value)
-  // );
+       statusLevels[2] = true;
+       console.log(statusLevels)
 
-  // console.log(
-  //   "Senha moderada",
-  //   moderate.minRegExp.test(password.value) &&
-  //     moderate.oneNumericRegExp.test(password.value) &&
-  //     moderate.oneEspecialRegExp.test(password.value)
-  // );
+    }
+  } else {
+    setStatusLevelPassword("weak", "Senha fraca");
+  }
+}
 
-  // console.log(
-  //   "Senha forte",
-  //   strong.minRegExp.test(password.value) &&
-  //     strong.oneNumericRegExp.test(password.value) &&
-  //     strong.oneEspecialRegExp.test(password.value)
-  // );
-// });
+function setStatusLevelPassword(level, message) {
+  let text = document.querySelector(".text-status");
+
+  progressLevelPassword.className = `bar js-bar ${level}`;
+
+  text.innerHTML = message;
+  text.className =`text-status ${level}`;	
+  
+}

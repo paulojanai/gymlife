@@ -72,15 +72,11 @@
         </div>
 
         <div class="validation-password">
-          <svg viewBox="0 0 405 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line class="line-empty" y1="2.00024" x2="132.333" y2="2.00024" stroke-width="4" />
-            <line class="line-empty" x1="136.333" y1="2.00024" x2="268.667" y2="2.00024" stroke-width="4" />
-            <line class="line-empty" x1="272.667" y1="2.00024" x2="405" y2="2.00024" stroke-width="4" />
-            <line class="line-progress" y1="2.00024" x2="132.333" y2="2.00024" stroke-width="4" />
-            <line class="line-progress" x1="136.333" y1="2.00024" x2="268.667" y2="2.00024" stroke-width="4" />
-            <line class="line-progress" x1="272.667" y1="2.00024" x2="405" y2="2.00024" stroke-width="4" />
-          </svg>
-          <p class="status">status senha</p>
+          <div class="progress">
+            <div class="bar-empty"></div>
+            <div class="bar js-bar"></div>
+          </div>
+          <p class="text-status">Senha fraca</p>
         </div>
 
         <div class="required-in-password">
@@ -96,7 +92,7 @@
             </li>
             <li>
               <span><i data-lucide="x" class="icon"></i></span>
-              <p>Pelo menos 1 caractere especial. (!@#$%^&*)</p>
+              <p>Pelo menos 1 caractere especial. (@, #, $, !, %, *, ?, &)</p>
             </li>
           </ul>
         </div>
