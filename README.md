@@ -1,4 +1,4 @@
-# ![Post 1 image](.img/screen.png)
+# ![Post 1 image](./img/screen.png)
 
 ## 💻 Project
 
