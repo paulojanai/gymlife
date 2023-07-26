@@ -1,4 +1,4 @@
-# ![Post 1 image](.img/screen.png)
+# ![Post 1 image](./img/screen.png)
 
 ## 💻 Project
 
@@ -16,6 +16,6 @@ This project was developed with the following technologies:
 
 - HTML & CSS (Sass)
 - GSAP
-- JavaScrip
+- JavaScript
 
 >
