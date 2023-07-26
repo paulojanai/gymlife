@@ -4,6 +4,8 @@
 
 Página de cadastro para academia.
 
+O intuido desse projeto foi desenvolver um formuário com validações (email e senha) e praticar algumas microinterações como: efeito no olho ao mostrar e esconder a senha, mostrar erro no input inválido e validar o grau de dificuldade da senha digitada.
+
 >
 
 ## 🔖 Layout and Design
