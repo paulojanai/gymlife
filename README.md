@@ -1,7 +1,7 @@
 # ![Post 1 image](./img/screen.png)
 
 ## 🔴 Live
-https://gymlife-health.netlify.app/
+<a href="https://gymlife-health.netlify.app" style="color: #00a0df" target="_blank">Gym life</a>
 
 ## 💻 Project
 
